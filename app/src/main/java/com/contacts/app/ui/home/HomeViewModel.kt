@@ -1,13 +1,10 @@
 package com.contacts.app.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.paging.PagedList
+import androidx.lifecycle.MutableLiveData
 import app.common.data.DataManager
 import app.common.data.model.ContactItem
-import app.common.data.model.ContactsRequest
-import app.common.presentation.ui.paging.Pager
 import app.common.presentation.ui.vm.BaseViewModel
-import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 /**
@@ -19,29 +16,20 @@ val homeModule = module {
 }
 
 class HomeViewModel(dataManager: DataManager) : BaseViewModel(dataManager) {
+    val contacts = MutableLiveData<List<ContactItem>>()
+    val onSync = MutableLiveData<Boolean>()
 
-    fun loadContactsPaged(request: ContactsRequest): LiveData<PagedList<ContactItem>> {
-        return Pager.pageKeyed<Int, ContactItem> {
-            loadInitial = { param ->
-                // You may find it weird to pass a fake static key here!
-                // But you should know that the first key must be NULL in the first query in Shopify!!
-                // for this reason we depend on next and set it NULL for the first time
-                loadContacts(request) {
-                    param.callback.onResult(it, 1, 1)
-                }
-            }
-            loadAfter = { param ->
-                loadContacts(request.apply { nextPage = param.key }) {
-                    param.callback.onResult(it, param.key + 1)
-                }
-            }
+    fun loadContacts() {
+        request {
+            val response = dm.contactsRepo.contacts()
+            contacts.postValue(response)
         }
     }
 
-    private fun loadContacts(request: ContactsRequest, onLoad: (List<ContactItem>) -> Unit) {
+    fun syncContacts() {
         request {
-            val response = dm.contactsRepo.contacts(request)
-            onLoad(response)
+            val response = dm.contactsRepo.sync()
+            onSync.postValue(response)
         }
     }
 }

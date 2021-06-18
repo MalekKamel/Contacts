@@ -1,28 +1,38 @@
 package app.common.data.domain.contacts
 
 import app.common.data.model.ContactItem
-import app.common.data.model.ContactsRequest
 
 class ContactsRepo(
-    private val remoteSrc: ContactsRemoteDataSrc,
     private val localSrc: ContactsLocalDataSrc,
     private val providerDataSrc: ContactsProviderDataSrc,
+    private val contactSynchronizer: ContactSynchronizer,
 ) {
 
-    suspend fun contacts(request: ContactsRequest): List<ContactItem> {
-        val items = providerDataSrc.all()
-        save(items)
-
-        return items
+    suspend fun contacts(): List<ContactItem> {
+        val items = localSrc.all()
+        if (items.isNotEmpty()) return items
+        return fetchFromProvider()
     }
 
-    suspend fun save(contacts: List<ContactItem>) {
-        deleteAll()
+    private suspend fun fetchFromProvider(): List<ContactItem> {
+        val providerItems = providerDataSrc.all()
+        save(providerItems)
+        return providerItems
+    }
+
+    suspend fun sync(): Boolean {
+        val result = contactSynchronizer.sync()
+        save(result.new)
+        update(result.modified)
+        return result.isModified()
+    }
+
+    private suspend fun save(contacts: List<ContactItem>) {
         localSrc.save(contacts)
     }
 
-    suspend fun deleteAll() {
-        localSrc.deleteAll()
+    private suspend fun update(contacts: List<ContactItem>) {
+        localSrc.update(contacts)
     }
 
 }

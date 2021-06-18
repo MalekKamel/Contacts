@@ -31,4 +31,7 @@ dependencies {
     api Deps.room_ktx
 
     api Deps.androidx_preference
+
+    implementation Deps.workManager
+    implementation Deps.concurrentFutures
 }

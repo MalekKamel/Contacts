@@ -1,8 +1,10 @@
 package app.common.data.domain.contacts
 
-import com.sha.modelmapper.ListMapper
 import app.common.data.db.ContactsDatabase
-import app.common.data.model.*
+import app.common.data.model.ContactEntityMapper
+import app.common.data.model.ContactItem
+import app.common.data.model.ContactItemMapper
+import com.sha.modelmapper.ListMapper
 
 class ContactsLocalDataSrc(private val db: ContactsDatabase) {
 
@@ -12,6 +14,10 @@ class ContactsLocalDataSrc(private val db: ContactsDatabase) {
 
     suspend fun save(contacts: List<ContactItem>) {
         db.contactDao().insert(ListMapper(ContactEntityMapper()).map(contacts))
+    }
+
+    suspend fun update(contacts: List<ContactItem>) {
+        db.contactDao().update(ListMapper(ContactEntityMapper()).map(contacts))
     }
 
     suspend fun deleteAll() {

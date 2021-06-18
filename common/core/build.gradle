@@ -15,8 +15,5 @@ dependencies {
 
 
     api Deps.koin_android
-    api Deps.koin_ext
-    api Deps.koin_java
-    api Deps.koin_scope
-    api Deps.koin_viewModel
+    api Deps.koin_workManager
 }

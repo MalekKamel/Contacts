@@ -1,9 +1,6 @@
 package app.common.data.db
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import app.common.data.model.ContactEntity
 
 @Dao
@@ -17,6 +14,9 @@ interface ContactDao {
 
     @Insert
     suspend fun insert(contacts: List<ContactEntity>)
+
+    @Update
+    suspend fun update(contacts: List<ContactEntity>)
 
     @Delete
     suspend fun delete(contact: ContactEntity)

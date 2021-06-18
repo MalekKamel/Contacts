@@ -33,9 +33,10 @@ class PicassoUtil {
                     return
                 }
 
+                val client: OkHttpClient = KoinJavaComponent.get(OkHttpClient::class.java)
                 val picasso = Picasso
                         .Builder(iv.context)
-                        .downloader(OkHttp3Downloader(KoinJavaComponent.get(OkHttpClient::class.java)))
+                        .downloader(OkHttp3Downloader(client))
                         .build()
 
                 val creator = if (fromFile)

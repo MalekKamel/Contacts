@@ -5,7 +5,7 @@ import android.os.Looper
 import androidx.navigation.fragment.findNavController
 import com.contacts.app.R
 import app.common.presentation.ui.frag.BaseFrag
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Created by Sha on 7/28/20.

@@ -1,13 +1,11 @@
 package com.contacts.app.ui.home
 
-import androidx.lifecycle.Observer
 import app.common.core.util.linearLayoutManager
+import app.common.presentation.ui.frag.BaseFrag
 import com.contacts.app.R
 import com.sha.bulletin.dialog.LoadingDialog
 import kotlinx.android.synthetic.main.fragment_home.*
-import app.common.data.model.ContactsRequest
-import app.common.presentation.ui.frag.BaseFrag
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Created by Sha on 7/28/20.
@@ -21,18 +19,37 @@ class HomeFragment : BaseFrag<HomeViewModel>() {
     override fun onResume() {
         super.onResume()
         setupUi()
-        loadContacts(ContactsRequest())
+        observeContacts()
+        observeContactSync()
+        loadContacts()
     }
 
     private fun setupUi() {
         rv.linearLayoutManager(context)
     }
 
-    private fun loadContacts(request: ContactsRequest) {
-        vm.loadContactsPaged(request).observe(viewLifecycleOwner, Observer {
+    private fun observeContactSync() {
+        vm.onSync.observe(viewLifecycleOwner) { isModified ->
+            if (!isModified) return@observe
+            loadContacts()
+        }
+    }
+
+    private fun observeContacts() {
+        vm.contacts.observe(viewLifecycleOwner) {
             rv.adapter = adapter
-            adapter.submitList(it)
-        })
+            adapter.list = it
+            adapter.notifyDataSetChanged()
+            syncContacts()
+        }
+    }
+
+    private fun loadContacts() {
+        vm.loadContacts()
+    }
+
+    private fun syncContacts() {
+        vm.syncContacts()
     }
 
     override fun showLoadingDialog(content: String): LoadingDialog? {

@@ -21,21 +21,21 @@ fun injectDataModule() = loadModule
 
 private val loadModule by lazy {
     loadKoinModules(
-            listOf(
-                    dataManagerModule,
-                    prefModule,
-                    okHttpModule,
-                    contactsModule,
-                    roomModule
-            )
+        listOf(
+            dataManagerModule,
+            prefModule,
+            okHttpModule,
+            contactsModule,
+            roomModule
+        )
     )
 }
 
 val dataManagerModule = module {
     single {
         DataManager(
-                pref = get(),
-                contactsRepo = get()
+            pref = get(),
+            contactsRepo = get()
         )
     }
 }
@@ -47,8 +47,8 @@ val okHttpModule = module {
 
 
         val builder = OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .addInterceptor(get<TokenInterceptor>())
+            .addInterceptor(loggingInterceptor)
+            .addInterceptor(get<TokenInterceptor>())
         builder.build()
     }
 
@@ -65,6 +65,7 @@ val contactsModule = module {
     single {
         RetrofitHelper.createService(BuildConfig.API_BASE_URL, get(), ContactsApi::class.java)
     }
+    factory { ContactSynchronizer(get(), get()) }
     factory { ContactsLocalDataSrc(get()) }
     factory { ContactsRemoteDataSrc(get()) }
 
@@ -76,6 +77,7 @@ val contactsModule = module {
 
 val roomModule = module {
     single {
-        Room.databaseBuilder(androidContext(), ContactsDatabase::class.java, "ContactsDatabase").build()
+        Room.databaseBuilder(androidContext(), ContactsDatabase::class.java, "ContactsDatabase")
+            .build()
     }
 }
