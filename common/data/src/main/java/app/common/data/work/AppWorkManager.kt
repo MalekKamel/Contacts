@@ -21,7 +21,7 @@ object AppWorkManager {
         WorkManager.getInstance(CoreApp.context)
             .enqueueUniquePeriodicWork(
                 ContactSyncWorker::class.java.name,
-                ExistingPeriodicWorkPolicy.REPLACE,
+                ExistingPeriodicWorkPolicy.KEEP,
                 request
             )
     }

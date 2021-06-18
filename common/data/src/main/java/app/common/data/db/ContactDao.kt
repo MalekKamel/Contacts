@@ -19,7 +19,7 @@ interface ContactDao {
     suspend fun update(contacts: List<ContactEntity>)
 
     @Delete
-    suspend fun delete(contact: ContactEntity)
+    suspend fun delete(contact: List<ContactEntity>)
 
     @Query("DELETE FROM contacts")
     suspend fun deleteAll()

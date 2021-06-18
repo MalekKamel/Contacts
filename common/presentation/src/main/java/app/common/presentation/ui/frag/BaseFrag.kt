@@ -33,11 +33,15 @@ abstract class BaseFrag<VM : BaseViewModel> : Fragment(), ViewInterface {
             }
             dismissLoadingDialogs()
         })
-        vm.showError.observe(this, Observer { showErrorInFlashBar(it) })
-        vm.showErrorRes.observe(this, Observer { showErrorInFlashBar(it) })
+        vm.showError.observe(this) { showErrorInFlashBar(it) }
+        vm.showErrorRes.observe(this) { showErrorInFlashBar(it) }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(layoutId, container, false)
     }
 

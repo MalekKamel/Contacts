@@ -20,6 +20,7 @@ class ContactSynchronizer(
 
         val newItems = mutableListOf<ContactItem>()
         val modifiedItems = mutableListOf<ContactItem>()
+        val deletedItems = mutableListOf<ContactItem>()
 
         for (originalItem in originalItems) {
             val localItem: ContactItem? = localItemsMap[originalItem.id]
@@ -37,7 +38,14 @@ class ContactSynchronizer(
             modifiedItems.add(originalItem)
         }
 
-        return ContactSyncResult(newItems, modifiedItems)
+        // find deleted items
+        for (localItem in localItems) {
+            val originalItem: ContactItem? = originalItemsMap[localItem.id]
+            if (originalItem != null) continue
+            deletedItems.add(localItem)
+        }
+
+        return ContactSyncResult(newItems, modifiedItems, deletedItems)
     }
 
 }

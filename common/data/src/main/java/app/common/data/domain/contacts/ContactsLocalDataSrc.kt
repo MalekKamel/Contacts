@@ -19,6 +19,9 @@ class ContactsLocalDataSrc(private val db: ContactsDatabase) {
     suspend fun update(contacts: List<ContactItem>) {
         db.contactDao().update(ListMapper(ContactEntityMapper()).map(contacts))
     }
+    suspend fun delete(contacts: List<ContactItem>) {
+        db.contactDao().delete(ListMapper(ContactEntityMapper()).map(contacts))
+    }
 
     suspend fun deleteAll() {
         db.contactDao().deleteAll()

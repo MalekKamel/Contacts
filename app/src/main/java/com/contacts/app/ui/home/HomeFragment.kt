@@ -1,6 +1,9 @@
 package com.contacts.app.ui.home
 
+import android.Manifest
+import android.os.Bundle
 import app.common.core.util.linearLayoutManager
+import app.common.presentation.permission.PermissionRequester
 import app.common.presentation.ui.frag.BaseFrag
 import com.contacts.app.R
 import com.sha.bulletin.dialog.LoadingDialog
@@ -16,11 +19,15 @@ class HomeFragment : BaseFrag<HomeViewModel>() {
     override val vm: HomeViewModel by viewModel()
     private val adapter: ContactsAdapter by lazy { ContactsAdapter(this) }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        observeContacts()
+        observeContactSync()
+    }
+
     override fun onResume() {
         super.onResume()
         setupUi()
-        observeContacts()
-        observeContactSync()
         loadContacts()
     }
 
@@ -45,7 +52,12 @@ class HomeFragment : BaseFrag<HomeViewModel>() {
     }
 
     private fun loadContacts() {
-        vm.loadContacts()
+        PermissionRequester(requireActivity())
+            .request(
+                Manifest.permission.READ_CONTACTS
+            ) {
+                vm.loadContacts()
+            }
     }
 
     private fun syncContacts() {
