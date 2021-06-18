@@ -2,8 +2,8 @@ package app.common.presentation.ui.adapter
 
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import app.common.presentation.ui.view.ViewInterface
 import app.common.core.util.reportAndPrint
+import app.common.presentation.ui.view.ViewInterface
 
 
 abstract class BasePagedListAdapter<T> constructor(protected var viewInterface: ViewInterface, diffCallback: DiffUtil.ItemCallback<T>)

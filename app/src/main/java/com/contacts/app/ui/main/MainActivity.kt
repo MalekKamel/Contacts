@@ -2,8 +2,8 @@ package com.contacts.app.ui.main
 
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
-import com.contacts.app.R
 import app.common.presentation.navigation.NavHostActivity
+import com.contacts.app.R
 
 /**
  * Created by Sha on 7/28/20.

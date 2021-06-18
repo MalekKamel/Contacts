@@ -3,8 +3,8 @@ package com.contacts.app.ui.splash
 import android.os.Handler
 import android.os.Looper
 import androidx.navigation.fragment.findNavController
-import com.contacts.app.R
 import app.common.presentation.ui.frag.BaseFrag
+import com.contacts.app.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**

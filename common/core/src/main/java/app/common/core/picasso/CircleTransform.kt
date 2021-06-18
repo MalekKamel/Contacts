@@ -1,9 +1,9 @@
 package app.common.core.picasso
 
 import android.graphics.*
-import com.squareup.picasso.Transformation
 import app.common.core.io.BitmapUtil
 import app.common.core.util.reportAndPrint
+import com.squareup.picasso.Transformation
 
 class CircleTransform : Transformation {
     override fun transform(source: Bitmap): Bitmap {

@@ -2,8 +2,8 @@ package app.common.presentation.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import app.common.presentation.ui.view.ViewInterface
 import app.common.core.util.reportAndPrint
+import app.common.presentation.ui.view.ViewInterface
 
 abstract class BaseActivity
     : AppCompatActivity(), ViewInterface {

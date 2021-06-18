@@ -1,8 +1,8 @@
 package app.common.presentation.ui.adapter
 
 import android.view.ViewGroup
-import app.common.presentation.ui.view.ViewInterface
 import app.common.core.util.reportAndPrint
+import app.common.presentation.ui.view.ViewInterface
 
 /**
  * Created by Sha on 4/20/17.

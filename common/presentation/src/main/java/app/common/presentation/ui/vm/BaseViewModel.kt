@@ -3,14 +3,12 @@ package app.common.presentation.ui.vm
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.common.data.DataManager
+import app.common.presentation.requester.AppRequester
 import com.sha.coroutinerequester.Presentable
 import com.sha.coroutinerequester.RequestOptions
-
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.launch
-import app.common.presentation.requester.AppRequester
-
-import app.common.data.DataManager
 
 open class BaseViewModel(val dm: DataManager) : ViewModel() {
 

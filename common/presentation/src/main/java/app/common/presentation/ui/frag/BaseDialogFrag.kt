@@ -11,11 +11,11 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.annotation.Nullable
 import androidx.fragment.app.FragmentActivity
-import com.sha.kamel.navigator.FragmentNavigator
-import com.trello.rxlifecycle2.components.support.RxDialogFragment
+import app.common.core.util.reportAndPrint
 import app.common.presentation.ui.activity.BaseActivity
 import app.common.presentation.ui.view.ViewInterface
-import app.common.core.util.reportAndPrint
+import com.sha.kamel.navigator.FragmentNavigator
+import com.trello.rxlifecycle2.components.support.RxDialogFragment
 
 /**
  * Created by Sha on 9/24/17.

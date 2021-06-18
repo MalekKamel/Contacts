@@ -4,12 +4,12 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.text.TextUtils
 import android.widget.ImageView
+import app.common.core.util.reportAndPrint
 import com.squareup.picasso.Callback
 import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
 import okhttp3.OkHttpClient
 import org.koin.java.KoinJavaComponent
-import app.common.core.util.reportAndPrint
 import java.io.File
 
 /**
