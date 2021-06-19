@@ -16,7 +16,7 @@ class ContactsRetriever(private val contentResolver: ContentResolver) {
         return suspendCoroutine { cont ->
             val items: MutableList<ContactItem> = ArrayList()
 
-            val rawContactsIdList = rawContactsIdList
+            val rawContactsIdList = contactsIds
             val contactListSize = rawContactsIdList.size
 
             for (i in 0 until contactListSize) {
@@ -29,7 +29,7 @@ class ContactsRetriever(private val contentResolver: ContentResolver) {
     }
 
     private fun queryContact(index: Int): ContactItem? {
-        val rawContactId = rawContactsIdList[index]
+        val rawContactId = contactsIds[index]
 
         val whereClauseBuf = StringBuffer()
         whereClauseBuf.append(ContactsContract.Data.RAW_CONTACT_ID)
@@ -58,7 +58,7 @@ class ContactsRetriever(private val contentResolver: ContentResolver) {
 
         do {
             val mimeType = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.MIMETYPE))
-            getColumnValueByMimetype(cursor, mimeType, contactItem)
+            getValueByMimetype(cursor, mimeType, contactItem)
         } while (cursor.moveToNext())
 
         return contactItem
@@ -86,7 +86,7 @@ class ContactsRetriever(private val contentResolver: ContentResolver) {
         queryColumnList.toTypedArray()
     }
 
-    private val rawContactsIdList: List<Int>
+    private val contactsIds: List<Int>
         get() {
             val items: MutableList<Int> = ArrayList()
             val rawContactUri: Uri = ContactsContract.RawContacts.CONTENT_URI
@@ -110,7 +110,7 @@ class ContactsRetriever(private val contentResolver: ContentResolver) {
             return items
         }
 
-    private fun getColumnValueByMimetype(
+    private fun getValueByMimetype(
         cursor: Cursor,
         mimeType: String,
         contactItem: ContactItem
@@ -121,7 +121,7 @@ class ContactsRetriever(private val contentResolver: ContentResolver) {
                     cursor.string(ContactsContract.CommonDataKinds.Phone.NUMBER)
                 val phoneTypeInt: Int =
                     cursor.int(ContactsContract.CommonDataKinds.Phone.TYPE)
-                val phoneTypeStr = getPhoneTypeString(phoneTypeInt)
+                val phoneTypeStr = getPhoneType(phoneTypeInt)
                 contactItem.phone = phoneNumber
             }
             ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE -> {
@@ -138,7 +138,7 @@ class ContactsRetriever(private val contentResolver: ContentResolver) {
                     cursor.string(ContactsContract.CommonDataKinds.Email.ADDRESS)
                 val emailType: Int =
                     cursor.int(ContactsContract.CommonDataKinds.Email.TYPE)
-                val emailTypeStr = getEmailTypeString(emailType)
+                val emailTypeStr = getEmailType(emailType)
             }
             ContactsContract.CommonDataKinds.Im.CONTENT_ITEM_TYPE -> {
                 val imProtocol: String? =
@@ -167,7 +167,7 @@ class ContactsRetriever(private val contentResolver: ContentResolver) {
                     cursor.string(ContactsContract.CommonDataKinds.SipAddress.SIP_ADDRESS)
                 val addressTypeInt: Int =
                     cursor.int(ContactsContract.CommonDataKinds.SipAddress.TYPE)
-                val addressTypeStr = getEmailTypeString(addressTypeInt)
+                val addressTypeStr = getEmailType(addressTypeInt)
             }
             ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE -> {
                 val country: String? =
@@ -182,7 +182,7 @@ class ContactsRetriever(private val contentResolver: ContentResolver) {
                     cursor.string(ContactsContract.CommonDataKinds.StructuredPostal.POSTCODE)
                 val postType: Int =
                     cursor.int(ContactsContract.CommonDataKinds.StructuredPostal.TYPE)
-                val postTypeStr = getEmailTypeString(postType)
+                val postTypeStr = getEmailType(postType)
             }
             ContactsContract.CommonDataKinds.Identity.CONTENT_ITEM_TYPE -> {
                 val identity: String? =
@@ -205,7 +205,7 @@ class ContactsRetriever(private val contentResolver: ContentResolver) {
                     cursor.string(ContactsContract.CommonDataKinds.Website.URL)
                 val websiteTypeInt: Int =
                     cursor.int(ContactsContract.CommonDataKinds.Website.TYPE)
-                val websiteTypeStr = getEmailTypeString(websiteTypeInt)
+                val websiteTypeStr = getEmailType(websiteTypeInt)
             }
             ContactsContract.CommonDataKinds.Note.CONTENT_ITEM_TYPE -> {
                 val note: String? =
@@ -214,7 +214,7 @@ class ContactsRetriever(private val contentResolver: ContentResolver) {
         }
     }
 
-    private fun getEmailTypeString(dataType: Int): String {
+    private fun getEmailType(dataType: Int): String {
         return when (dataType) {
             ContactsContract.CommonDataKinds.Email.TYPE_HOME -> "Home"
             ContactsContract.CommonDataKinds.Email.TYPE_WORK -> "Work"
@@ -222,7 +222,7 @@ class ContactsRetriever(private val contentResolver: ContentResolver) {
         }
     }
 
-    private fun getPhoneTypeString(dataType: Int): String {
+    private fun getPhoneType(dataType: Int): String {
         return when (dataType) {
             ContactsContract.CommonDataKinds.Phone.TYPE_HOME -> "Home"
             ContactsContract.CommonDataKinds.Phone.TYPE_WORK -> "Work"
