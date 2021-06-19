@@ -1,4 +1,4 @@
-package app.common.data.util
+package app.common.data
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import app.common.data.domain.contacts.ContactSynchronizerContract
@@ -7,6 +7,7 @@ import app.common.data.domain.contacts.ContactsProviderDataSrcContract
 import app.common.data.domain.contacts.ContactsRepo
 import app.common.data.model.ContactItem
 import app.common.data.model.ContactSyncResult
+import app.common.data.util.MainCoroutineRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers
