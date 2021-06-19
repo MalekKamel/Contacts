@@ -7,15 +7,18 @@ import android.view.ViewGroup
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.viewbinding.ViewBinding
 import app.common.presentation.ui.activity.BaseActivity
 import app.common.presentation.ui.view.ViewInterface
 import app.common.presentation.ui.vm.BaseViewModel
 
-abstract class BaseFrag<VM : BaseViewModel> : Fragment(), ViewInterface {
+abstract class BaseFrag<B : ViewBinding, VM : BaseViewModel> : Fragment(), ViewInterface {
 
     abstract val vm: VM
+    lateinit var binding: B
 
-    abstract var layoutId: Int
+    abstract fun inflate(inflater: LayoutInflater, container: ViewGroup?): B
+
     open var swipeRefreshLayoutId: Int = 0
 
     open var hasBackNavigation = false
@@ -42,7 +45,8 @@ abstract class BaseFrag<VM : BaseViewModel> : Fragment(), ViewInterface {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(layoutId, container, false)
+        binding = inflate(inflater, container)
+        return binding.root
     }
 
     override fun activity(): BaseActivity? = activity as? BaseActivity
