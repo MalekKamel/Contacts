@@ -17,17 +17,17 @@ has all features that would make it a modular, scalable, testable and maintainab
   
 The app is divided into 3 modules under `common` package. Each package has its own responsibilities.
   
-#### Core
+### Core
 
 Core module contains all shared classes that are visible to all modules. 
 Here we put all the code that we need to share with any module in the app.
 
-#### Data
+### Data
 
 Data module contains any classes related to the data in the app. 
 It contains network, local database, SharedPreferences, model classes, and any data-related classes.
 
-#### Presentation
+### Presentation
 
 Presentation modules contains all UI classes
  including view models, base activities, base fragments, custom views, and other common views.
