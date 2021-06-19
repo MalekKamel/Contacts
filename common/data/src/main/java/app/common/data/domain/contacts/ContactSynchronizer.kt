@@ -3,12 +3,16 @@ package app.common.data.domain.contacts
 import app.common.data.model.ContactItem
 import app.common.data.model.ContactSyncResult
 
+interface ContactSynchronizerContract {
+    suspend fun sync(): ContactSyncResult
+}
+
 class ContactSynchronizer(
     private val providerDataSrc: ContactsProviderDataSrc,
     private val localSrc: ContactsLocalDataSrc,
-) {
+) : ContactSynchronizerContract {
 
-    suspend fun sync(): ContactSyncResult {
+    override suspend fun sync(): ContactSyncResult {
         val originalItems = providerDataSrc.all()
         val localItems = localSrc.all()
 

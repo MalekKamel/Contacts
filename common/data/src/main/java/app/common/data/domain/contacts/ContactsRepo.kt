@@ -8,9 +8,9 @@ interface ContactsRepoInterface {
 }
 
 class ContactsRepo(
-    private val localSrc: ContactsLocalDataSrc,
-    private val providerDataSrc: ContactsProviderDataSrc,
-    private val contactSynchronizer: ContactSynchronizer,
+    private val localSrc: ContactsLocalDataSrcContract,
+    private val providerDataSrc: ContactsProviderDataSrcContract,
+    private val contactSynchronizer: ContactSynchronizerContract,
 ) : ContactsRepoInterface {
 
     override suspend fun contacts(): List<ContactItem> {
