@@ -9,7 +9,7 @@ has all features that would make it a modular, scalable, testable and maintainab
 - The app displays the list of user’s contacts that are saved in `Room` local database.
 - If there's no data in `Room`, it will be retrieved from contacts `ContentPorvider` and saved locally in `Room`.
 - The local contacts are synchronized with `ContentPorvider` in background every 15 minutes using `WorkManager`.
-- The local contacts are synchronized every time the user open the app.
+- The local contacts are synchronized every time the user opens the app.
 
 ## Modular Architecture
  
