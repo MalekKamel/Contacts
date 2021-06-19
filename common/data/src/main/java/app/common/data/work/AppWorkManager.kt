@@ -9,7 +9,7 @@ object AppWorkManager {
     fun startContactsWorker() {
         val constraints =
             Constraints.Builder()
-                .setRequiredNetworkType(NetworkType.UNMETERED)
+                .setRequiresBatteryNotLow(true)
                 .build()
         val request = PeriodicWorkRequest.Builder(
             ContactSyncWorker::class.java,
