@@ -36,14 +36,14 @@ class HomeFragment : BaseFrag<HomeViewModel>() {
     }
 
     private fun observeContactSync() {
-        vm.onSync.observe(viewLifecycleOwner) { isModified ->
+        vm.onSync.observe(this) { isModified ->
             if (!isModified) return@observe
             loadContacts()
         }
     }
 
     private fun observeContacts() {
-        vm.contacts.observe(viewLifecycleOwner) {
+        vm.contacts.observe(this) {
             rv.adapter = adapter
             adapter.list = it
             adapter.notifyDataSetChanged()

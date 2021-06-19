@@ -33,7 +33,7 @@ private val loadModule by lazy {
 
 val dataManagerModule = module {
     single {
-        DataManager(get())
+        DataManager(get<ContactsRepo>())
     }
 }
 
@@ -69,7 +69,13 @@ val contactsModule = module {
     factory { ContactsRetriever(androidContext().contentResolver) }
     factory { ContactsProviderDataSrc(get()) }
 
-    factory { ContactsRepo(get(), get(), get()) }
+    factory {
+        ContactsRepo(
+            get<ContactsLocalDataSrc>(),
+            get<ContactsProviderDataSrc>(),
+            get<ContactSynchronizer>()
+        )
+    }
 }
 
 val roomModule = module {
