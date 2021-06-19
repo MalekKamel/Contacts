@@ -13,11 +13,7 @@ class App : CoreApp() {
 
     override fun onCreate() {
         super.onCreate()
-        try {
-            KoinInjector.inject(this)
-            AppWorkManager.startContactsWorker()
-        } catch (e: Exception) {
-            e.reportAndPrint()
-        }
+        KoinInjector.inject(this)
+        AppWorkManager.startContactsWorker()
     }
 }
