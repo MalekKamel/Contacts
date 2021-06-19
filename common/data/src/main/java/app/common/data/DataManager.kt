@@ -1,9 +1,7 @@
 package app.common.data
 
-import app.common.data.domain.contacts.ContactsRepo
-import app.common.data.pref.SharedPref
+import app.common.data.domain.contacts.ContactsRepoInterface
 
 open class DataManager(
-        val pref: SharedPref,
-        val contactsRepo: ContactsRepo
+    val contactsRepo: ContactsRepoInterface
 )

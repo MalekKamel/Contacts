@@ -17,8 +17,6 @@ open class BaseViewModel(val dm: DataManager) : ViewModel() {
     val showError = MutableLiveData<String>()
     val showErrorRes = MutableLiveData<Int>()
 
-    val pref by lazy { dm.pref }
-
     private val requester: AppRequester by lazy {
         val presentable = object: Presentable {
             override fun showError(error: String) { showError.value = error }

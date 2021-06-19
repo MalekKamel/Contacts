@@ -34,4 +34,10 @@ dependencies {
 
     implementation Deps.workManager
     implementation Deps.concurrentFutures
+
+    testImplementation TestDeps.kotlinx_coroutine_test
+    testImplementation TestDeps.androidx_core_testing
+    testImplementation TestDeps.mockito_core
+    testImplementation TestDeps.mockito_kotlin
+    testImplementation TestDeps.junit
 }

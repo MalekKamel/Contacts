@@ -27,4 +27,9 @@ dependencies {
     implementation project(AppModule.presentation)
     implementation project(AppModule.data)
 
+    testImplementation TestDeps.kotlinx_coroutine_test
+    testImplementation TestDeps.androidx_core_testing
+    testImplementation TestDeps.mockito_core
+    testImplementation TestDeps.mockito_kotlin
+    testImplementation TestDeps.junit
 }

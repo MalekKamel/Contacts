@@ -33,10 +33,7 @@ private val loadModule by lazy {
 
 val dataManagerModule = module {
     single {
-        DataManager(
-            pref = get(),
-            contactsRepo = get()
-        )
+        DataManager(get())
     }
 }
 
