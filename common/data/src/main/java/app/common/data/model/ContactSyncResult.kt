@@ -6,6 +6,8 @@ data class ContactSyncResult(
     val deleted: List<ContactItem>
 ) {
     fun isModified(): Boolean {
-        return new.isNotEmpty() || modified.isNotEmpty()
+        return new.isNotEmpty() ||
+                modified.isNotEmpty() ||
+                deleted.isNotEmpty()
     }
 }
