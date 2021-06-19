@@ -2,6 +2,7 @@ package com.contacts.app.ui.home
 
 import android.Manifest
 import android.os.Bundle
+import android.view.View
 import app.common.core.util.linearLayoutManager
 import app.common.presentation.permission.PermissionRequester
 import app.common.presentation.ui.frag.BaseFrag
@@ -25,13 +26,20 @@ class HomeFragment : BaseFrag<HomeViewModel>() {
         observeContactSync()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupUi()
+    }
+
     override fun onResume() {
         super.onResume()
-        setupUi()
         loadContacts()
     }
 
     private fun setupUi() {
+        swipeRefresh.setOnRefreshListener {
+            loadContacts()
+        }
         rv.linearLayoutManager(context)
     }
 

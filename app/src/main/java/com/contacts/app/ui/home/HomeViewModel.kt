@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import app.common.data.DataManager
 import app.common.data.model.ContactItem
 import app.common.presentation.ui.vm.BaseViewModel
+import com.sha.coroutinerequester.RequestOptions
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -27,7 +28,10 @@ class HomeViewModel(dataManager: DataManager) : BaseViewModel(dataManager) {
     }
 
     fun syncContacts() {
-        request {
+        val options = RequestOptions.Builder()
+            .showLoading(false)
+            .build()
+        request(options) {
             val response = dm.contactsRepo.sync()
             onSync.postValue(response)
         }

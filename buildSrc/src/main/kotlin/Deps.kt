@@ -29,7 +29,7 @@ object Versions {
     const val androidx_paging = "2.0.0-rc01"
     const val androidx_swiperefreshlayout = "1.0.0"
     const val sha_bulletin = "0.1.3"
-    const val sha_coroutineRequester = "0.3.0"
+    const val sha_coroutineRequester = "0.5.0"
     const val androidx_ViewModelExt = "2.2.0"
 
     const val room = "2.3.0"

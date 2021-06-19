@@ -10,7 +10,7 @@ class AppRequester(presentable: Presentable) {
     }
 
     suspend fun request(
-        requestInfo: RequestOptions = RequestOptions.defaultInfo(),
+        requestInfo: RequestOptions = RequestOptions.default(),
         block: suspend () -> Unit
     ){
         requester.request(requestInfo, block)
