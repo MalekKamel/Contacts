@@ -19,18 +19,18 @@ class ContactsRepo(
         return fetchFromProvider()
     }
 
+    private suspend fun fetchFromProvider(): List<ContactItem> {
+        val providerItems = providerDataSrc.all()
+        save(providerItems)
+        return providerItems
+    }
+
     override suspend fun sync(): Boolean {
         val result = contactSynchronizer.sync()
         save(result.new)
         update(result.modified)
         delete(result.deleted)
         return result.isModified()
-    }
-
-    private suspend fun fetchFromProvider(): List<ContactItem> {
-        val providerItems = providerDataSrc.all()
-        save(providerItems)
-        return providerItems
     }
 
     private suspend fun save(contacts: List<ContactItem>) {
