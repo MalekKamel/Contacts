@@ -4,17 +4,17 @@ import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import app.common.presentation.navigator.AppNavigator
 import app.common.presentation.ui.frag.BaseFrag
-import com.contacts.app.R
 import com.contacts.app.databinding.FragmentSplashBinding
+import com.contacts.app.ui.home.HomeFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Created by Sha on 7/28/20.
  */
 
-class SplashFrag : BaseFrag<FragmentSplashBinding, SplashViewModel>() {
+class SplashFragment : BaseFrag<FragmentSplashBinding, SplashViewModel>() {
     override val vm: SplashViewModel by viewModel()
 
     override fun inflate(inflater: LayoutInflater, container: ViewGroup?): FragmentSplashBinding {
@@ -28,12 +28,12 @@ class SplashFrag : BaseFrag<FragmentSplashBinding, SplashViewModel>() {
 
     private fun setupFlow() {
         Handler(Looper.getMainLooper()).postDelayed({
-            showHome()
+            navigateToHome()
         }, 2000)
     }
 
-    private fun showHome() {
-        findNavController().navigate(R.id.action_splashFrag_to_homeFrag)
+    private fun navigateToHome() {
+        AppNavigator(requireActivity()).replace(HomeFragment())
     }
 
 }

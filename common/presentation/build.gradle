@@ -33,6 +33,4 @@ dependencies {
     api "com.intuit.sdp:sdp-android:1.0.5"
     api "com.intuit.ssp:ssp-android:1.0.5"
     api "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-    api "androidx.navigation:navigation-ui-ktx:2.5.2"
-    api "androidx.navigation:navigation-fragment-ktx:2.5.2"
 }
