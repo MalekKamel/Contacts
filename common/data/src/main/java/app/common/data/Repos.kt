@@ -2,6 +2,6 @@ package app.common.data
 
 import app.common.data.domain.contacts.ContactsRepoInterface
 
-open class DataManager(
-    val contactsRepo: ContactsRepoInterface
+open class Repos(
+    val contacts: ContactsRepoInterface
 )

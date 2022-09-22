@@ -1,7 +1,7 @@
 package com.contacts.app.ui.home
 
 import androidx.lifecycle.MutableLiveData
-import app.common.data.DataManager
+import app.common.data.Repos
 import app.common.data.model.ContactItem
 import app.common.presentation.ui.vm.BaseViewModel
 import com.sha.coroutinerequester.RequestOptions
@@ -16,13 +16,13 @@ val homeModule = module {
     viewModel { HomeViewModel(get()) }
 }
 
-class HomeViewModel(dataManager: DataManager) : BaseViewModel(dataManager) {
+class HomeViewModel(dataManager: Repos) : BaseViewModel(dataManager) {
     val contacts = MutableLiveData<List<ContactItem>>()
     val onSync = MutableLiveData<Boolean>()
 
     fun loadContacts() {
         request {
-            val response = dm.contactsRepo.contacts()
+            val response = dm.contacts.contacts()
             contacts.postValue(response)
         }
     }
@@ -32,7 +32,7 @@ class HomeViewModel(dataManager: DataManager) : BaseViewModel(dataManager) {
             .showLoading(false)
             .build()
         request(options) {
-            val response = dm.contactsRepo.sync()
+            val response = dm.contacts.sync()
             onSync.postValue(response)
         }
     }

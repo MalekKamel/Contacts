@@ -1,7 +1,7 @@
 package com.contacts.app.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import app.common.data.DataManager
+import app.common.data.Repos
 import app.common.data.util.MainCoroutineRule
 import app.common.data.util.getOrAwaitValue
 import com.contacts.app.ui.home.HomeViewModel
@@ -28,7 +28,7 @@ class HomeViewModelTest {
 
     @Before
     fun setup() {
-        val dm = DataManager(FakeContactsRepo())
+        val dm = Repos(FakeContactsRepo())
         vm = HomeViewModel(dm)
     }
 

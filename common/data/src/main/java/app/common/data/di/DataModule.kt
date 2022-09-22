@@ -3,13 +3,11 @@ package app.common.data.di
 import androidx.preference.PreferenceManager
 import androidx.room.Room
 import app.common.data.BuildConfig
-import app.common.data.DataManager
+import app.common.data.Repos
 import app.common.data.db.ContactsDatabase
 import app.common.data.domain.contacts.*
 import app.common.data.network.interceptor.TokenInterceptor
 import app.common.data.pref.SharedPref
-import app.common.data.rx.SchedulerProvider
-import app.common.data.rx.SchedulerProviderImpl
 import app.common.data.util.RetrofitHelper
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -33,7 +31,7 @@ private val loadModule by lazy {
 
 val dataManagerModule = module {
     single {
-        DataManager(get<ContactsRepo>())
+        Repos(get<ContactsRepo>())
     }
 }
 
@@ -49,7 +47,6 @@ val okHttpModule = module {
         builder.build()
     }
 
-    single<SchedulerProvider> { SchedulerProviderImpl() }
     single { TokenInterceptor(get()) }
 }
 

@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.5.10'
+    ext.kotlin_version = '1.7.10'
 
     repositories {
         jcenter()
@@ -8,11 +8,9 @@ buildscript {
         // Fabric
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.1'
+        classpath 'com.android.tools.build:gradle:7.2.2'
         // NOTE: Do not place your application versions here; they belong
         // in the individual module build.gradle files
-
-        classpath 'com.google.gms:google-services:4.3.8'
 
         // These docs use an open ended version so that our plugin
         // can be updated quickly in response to Android tooling updates
@@ -21,9 +19,6 @@ buildscript {
         // https://docs.fabric.io/android/changelog.html#fabric-gradle-plugin
 
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.4.0-alpha03"
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.7.0'
     }
 }
 

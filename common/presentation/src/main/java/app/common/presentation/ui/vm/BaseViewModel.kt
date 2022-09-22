@@ -3,19 +3,15 @@ package app.common.presentation.ui.vm
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.common.data.DataManager
+import app.common.data.Repos
 import app.common.presentation.requester.AppRequester
 import com.sha.coroutinerequester.Presentable
 import com.sha.coroutinerequester.RequestOptions
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.EmptyCoroutineContext
 
-open class BaseViewModel(val dm: DataManager) : ViewModel() {
-
-    val disposables: CompositeDisposable = CompositeDisposable()
+open class BaseViewModel(val dm: Repos) : ViewModel() {
     val toggleLoading = MutableLiveData<Boolean>()
     val showError = MutableLiveData<String>()
     val showErrorRes = MutableLiveData<Int>()
@@ -43,11 +39,6 @@ open class BaseViewModel(val dm: DataManager) : ViewModel() {
             }
         }
         AppRequester(presentable)
-    }
-
-    override fun onCleared() {
-        disposables.dispose()
-        super.onCleared()
     }
 
     /**

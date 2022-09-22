@@ -26,6 +26,7 @@
         <activity
             android:name="com.contacts.app.ui.main.MainActivity"
             android:configChanges="orientation|keyboardHidden|locale|layoutDirection"
+            android:exported="true"
             android:windowSoftInputMode="adjustPan">
 
             <intent-filter>
