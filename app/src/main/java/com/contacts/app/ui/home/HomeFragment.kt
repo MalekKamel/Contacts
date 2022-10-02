@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import app.common.core.util.linearLayoutManager
 import app.common.presentation.permission.PermissionRequester
-import app.common.presentation.ui.frag.BaseFrag
+import app.common.presentation.ui.frag.AppFragment
 import com.contacts.app.databinding.FragmentHomeBinding
 import com.sha.bulletin.dialog.LoadingDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -16,7 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  * Created by Sha on 7/28/20.
  */
 
-class HomeFragment : BaseFrag<FragmentHomeBinding, HomeViewModel>() {
+class HomeFragment : AppFragment<FragmentHomeBinding, HomeViewModel>() {
     override val vm: HomeViewModel by viewModel()
     private val adapter: ContactsAdapter by lazy { ContactsAdapter(this) }
 

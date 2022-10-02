@@ -10,9 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
 import app.common.presentation.ui.activity.BaseActivity
 import app.common.presentation.ui.view.ViewInterface
-import app.common.presentation.ui.vm.BaseViewModel
+import app.common.presentation.ui.vm.AppViewModel
 
-abstract class BaseFrag<B : ViewBinding, VM : BaseViewModel> : Fragment(), ViewInterface {
+abstract class AppFragment<B : ViewBinding, VM : AppViewModel> : Fragment(), ViewInterface {
 
     abstract val vm: VM
     lateinit var binding: B
